@@ -1,10 +1,38 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import emailjs from '@emailjs/browser';
-import { CheckCircle2, Github, Linkedin, Loader2, Mail, MapPin, Send, X } from 'lucide-react';
+import { Github, Linkedin, Loader2, Mail, MapPin, Send, X } from 'lucide-react';
 import SectionHeading from './SectionHeading.jsx';
 import { profile } from '../data/portfolioData.js';
 
 const initialForm = { name: '', email: '', subject: '', message: '' };
+
+function SuccessPortal({ onClose }) {
+  return createPortal(
+    <div className="sent-overlay" role="dialog" aria-modal="true" aria-label="Message sent successfully">
+      <div className="success-particles" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="sent-card glass-card">
+        <button className="sent-close" onClick={onClose} aria-label="Close message sent popup"><X size={18} /></button>
+        <div className="gojo-ring">
+          <img src="/gojo-success.png" alt="Success avatar" />
+        </div>
+        <p className="success-kicker">Transmission complete</p>
+        <h3>メッセージ送信済み!</h3>
+        <span className="success-subtitle">Message Sent!</span>
+        <p>Your message reached me successfully. I’ll review it and get back to you soon.</p>
+        <button className="primary-btn mini" onClick={onClose}>Write Another</button>
+      </div>
+    </div>,
+    document.body
+  );
+}
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm);
@@ -99,23 +127,11 @@ export default function Contact() {
           <button className="primary-btn" type="submit" disabled={loading}>
             {loading ? <Loader2 className="spin" size={16} /> : <Send size={16} />} Send Message
           </button>
-          {status.message && <p className={`form-status ${status.type}`}>{status.message}</p>}
+          {status.message && status.type === 'error' && <p className="form-status error">{status.message}</p>}
         </form>
       </div>
 
-      {showSuccess && (
-        <div className="sent-overlay" role="dialog" aria-modal="true" aria-label="Message sent successfully">
-          <div className="sent-card glass-card">
-            <button className="sent-close" onClick={() => setShowSuccess(false)} aria-label="Close message sent popup"><X size={18} /></button>
-            <div className="sent-orbit">
-              <CheckCircle2 size={46} />
-            </div>
-            <h3>Message Sent!</h3>
-            <p>Your message has been delivered successfully. Thank you for contacting me — I will get back to you soon.</p>
-            <button className="primary-btn mini" onClick={() => setShowSuccess(false)}>Write Another</button>
-          </div>
-        </div>
-      )}
+      {showSuccess && <SuccessPortal onClose={() => setShowSuccess(false)} />}
     </section>
   );
 }

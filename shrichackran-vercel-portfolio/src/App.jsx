@@ -14,10 +14,9 @@ import { projects } from './data/portfolioData.js';
 
 export default function App() {
   const [activeProjectId, setActiveProjectId] = useState(null);
-  const [booting, setBooting] = useState(() => !sessionStorage.getItem('portfolioBooted'));
+  const [booting, setBooting] = useState(true);
 
   const completeBoot = useCallback(() => {
-    sessionStorage.setItem('portfolioBooted', 'true');
     setBooting(false);
   }, []);
 
@@ -33,6 +32,16 @@ export default function App() {
   return (
     <div className="site-shell site-enter">
       <div className="bg-grid" />
+      <div className="ambient-particles" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
       <div className="scanline" />
       <div className="glow glow-one" />
       <div className="glow glow-two" />

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 const bootLines = [
-  'INITIALIZING PORTFOLIO_CORE...',
-  'LOADING AI_STACK: TensorFlow / PyTorch / LLMs',
-  'SYNCING PROJECT ASSETS...',
-  'CONNECTING DEV PROFILE...',
-  'ACCESS GRANTED: SHRICHACKRAN_K_M'
+  'whoami',
+  'Shrichackran K M  •  Full-Stack Developer',
+  'cat stack.json',
+  '{ "ai": ["LLMs", "RAG", "TensorFlow", "PyTorch"], "web": ["React", "Node.js"] }',
+  'launch --portfolio --clean-ui --recruiter-ready'
 ];
 
 export default function BootScreen({ onComplete }) {
@@ -14,11 +14,11 @@ export default function BootScreen({ onComplete }) {
   useEffect(() => {
     const lineTimer = setInterval(() => {
       setLineIndex((current) => Math.min(current + 1, bootLines.length - 1));
-    }, 420);
+    }, 230);
 
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 2600);
+    }, 1750);
 
     return () => {
       clearInterval(lineTimer);
@@ -27,19 +27,27 @@ export default function BootScreen({ onComplete }) {
   }, [onComplete]);
 
   return (
-    <div className="boot-screen" role="status" aria-label="Loading portfolio">
-      <div className="boot-noise" />
-      <div className="boot-panel">
-        <div className="boot-kicker">Shrichackran.dev</div>
-        <h1>Booting Portfolio</h1>
-        <div className="boot-terminal">
-          {bootLines.slice(0, lineIndex + 1).map((line) => (
-            <p key={line}><span>&gt;</span> {line}</p>
+    <div className="boot-screen" role="status" aria-label="Opening portfolio">
+      <div className="boot-aurora" />
+      <div className="boot-stars" />
+      <div className="boot-terminal-window">
+        <div className="terminal-dots"><span /><span /><span /></div>
+        <div className="boot-title-row">
+          <span className="boot-brand-mark">S</span>
+          <div>
+            <p>Opening developer workspace</p>
+            <h1>Shrichackran K M</h1>
+          </div>
+        </div>
+        <div className="boot-command-list">
+          {bootLines.slice(0, lineIndex + 1).map((line, index) => (
+            <p key={`${line}-${index}`} className={index % 2 === 0 ? 'command' : 'output'}>
+              <span>{index % 2 === 0 ? '$' : '→'}</span> {line}
+            </p>
           ))}
           <i />
         </div>
         <div className="boot-progress"><span /></div>
-        <p className="boot-note">Opening cyberpunk developer workspace...</p>
       </div>
     </div>
   );
