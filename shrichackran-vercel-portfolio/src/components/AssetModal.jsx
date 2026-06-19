@@ -1,10 +1,30 @@
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 
 export default function AssetModal({ project, onClose }) {
+  useEffect(() => {
+    if (!project) return undefined;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [project, onClose]);
+
   if (!project) return null;
 
-  return (
-    <div className="modal-backdrop" onClick={onClose}>
+  return createPortal(
+    <div className="modal-backdrop asset-modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div className="asset-modal glass-card" onClick={(event) => event.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Close assets modal"><X size={20} /></button>
         <span className="eyebrow">Project Assets</span>
@@ -27,6 +47,7 @@ export default function AssetModal({ project, onClose }) {
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
