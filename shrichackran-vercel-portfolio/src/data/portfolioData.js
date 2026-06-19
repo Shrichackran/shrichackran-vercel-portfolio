@@ -126,6 +126,32 @@ export const projects = [
       { src: '/project-assets/jobbzz/job5.png', caption: 'JoBzz system architecture and automation pipeline' }
     ]
   },
+
+  {
+    id: 'store-intelligence',
+    category: 'Backend Analytics',
+    title: 'Store Intelligence API System | Retail Analytics Backend',
+    summary:
+      'Containerised FastAPI backend that converts CCTV-derived retail events into offline store analytics, including metrics, funnel analysis, heatmaps, anomaly detection and health monitoring.',
+    github: 'https://github.com/Shrichackran/store-intelligence',
+    tech: ['Python', 'FastAPI', 'SQLite', 'Docker', 'Pytest', 'JSONL Events', 'Retail Analytics'],
+    highlights: [
+      'Built REST APIs for event ingestion, store metrics, funnel, heatmap, anomalies and health checks',
+      'Implemented idempotent batch ingestion with event deduplication and structured JSON responses',
+      'Validated Docker runtime, terminal dashboard, JSONL event logs and reviewer runbook',
+      'Achieved 13 passing tests with 81% coverage across API and pipeline modules'
+    ],
+    assets: [
+      { src: '/project-assets/store-intelligence/store1-docker-api-running.png', caption: 'Docker Compose running the FastAPI service with successful endpoint responses' },
+      { src: '/project-assets/store-intelligence/store2-dashboard-output.png', caption: 'Terminal dashboard output showing store metrics, funnel and health data' },
+      { src: '/project-assets/store-intelligence/store3-api-terminal.jpg', caption: 'Store Intelligence workspace with API logs and health endpoint verification' },
+      { src: '/project-assets/store-intelligence/store4-metrics-json.jpg', caption: 'Metrics JSON response including visitors, dwell, queue, conversion and traffic count' },
+      { src: '/project-assets/store-intelligence/store5-cctv-extraction.jpg', caption: 'CCTV frame extraction and store camera assets used for analytics event generation' },
+      { src: '/project-assets/store-intelligence/store6-billing-camera.jpg', caption: 'Billing-area camera frame prepared as retail analytics input evidence' },
+      { src: '/project-assets/store-intelligence/store7-test-coverage.jpg', caption: 'Pytest coverage report showing 13 tests passed with 81% coverage' },
+      { src: '/project-assets/store-intelligence/store8-presentation-cover.png', caption: 'Submission presentation cover summarising FastAPI, Docker, JSONL events, SQLite and tests' }
+    ]
+  },
   {
     id: 'wifi',
     category: 'Embedded',
@@ -147,9 +173,9 @@ export const projects = [
 export const skills = {
   Languages: ['Java', 'Python', 'JavaScript', 'SQL', 'HTML', 'CSS', 'C++'],
   Frontend: ['React', 'HTML5', 'CSS3', 'Responsive UI', 'Vite'],
-  Backend: ['Node.js', 'Express.js', 'REST APIs', 'MySQL'],
+  Backend: ['Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'MySQL', 'SQLite'],
   'AI / ML': ['TensorFlow', 'PyTorch', 'NumPy', 'Pandas', 'LLMs', 'RAG', 'GenAI'],
-  Tools: ['Git', 'GitHub', 'VS Code', 'Android Studio', 'n8n', 'Kubernetes', 'Render']
+  Tools: ['Git', 'GitHub', 'VS Code', 'Docker', 'Pytest', 'Android Studio', 'n8n', 'Kubernetes', 'Render']
 };
 
 export const services = [
