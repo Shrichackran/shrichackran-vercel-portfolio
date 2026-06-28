@@ -53,6 +53,7 @@ const assetLibrary = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupProfessionalLoader();
   const root = document.documentElement;
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme) root.setAttribute("data-theme", savedTheme);
@@ -106,6 +107,37 @@ document.addEventListener("DOMContentLoaded", () => {
   setupAssetModal();
   setupEmailForm();
 });
+
+
+function setupProfessionalLoader() {
+  const loader = document.getElementById("page-loader");
+  const percent = document.getElementById("loader-percent");
+  const bar = document.getElementById("loader-progress-bar");
+  if (!loader || !percent || !bar) return;
+
+  let progress = 0;
+  const tick = window.setInterval(() => {
+    const increment = progress < 75 ? 9 : 4;
+    progress = Math.min(progress + increment, 96);
+    percent.textContent = String(progress);
+    bar.style.width = `${progress}%`;
+  }, 110);
+
+  const finish = () => {
+    window.clearInterval(tick);
+    progress = 100;
+    percent.textContent = "100";
+    bar.style.width = "100%";
+    window.setTimeout(() => loader.classList.add("loaded"), 280);
+    window.setTimeout(() => loader.remove(), 900);
+  };
+
+  if (document.readyState === "complete") {
+    window.setTimeout(finish, 450);
+  } else {
+    window.addEventListener("load", () => window.setTimeout(finish, 450), { once: true });
+  }
+}
 
 function setupAssetModal() {
   const modal = document.getElementById("asset-modal");
@@ -185,12 +217,15 @@ function setupEmailForm() {
       message,
       user_message: message,
       to_name: "Shrichackran K M",
+      to_email: "shrichackran@gmail.com",
+      email_to: "shrichackran@gmail.com",
+      recipient_email: "shrichackran@gmail.com",
       time: new Date().toLocaleString()
     };
 
     try {
       if (!initEmail()) throw new Error("EmailJS SDK did not load. Check your internet connection or CDN access.");
-      await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, { publicKey: EMAILJS_PUBLIC_KEY });
+      await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
       status.textContent = "Message sent successfully. I’ll get back to you soon.";
       status.classList.add("success");
       form.reset();
