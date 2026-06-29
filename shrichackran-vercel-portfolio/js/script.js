@@ -2,7 +2,7 @@ import * as THREE from 'https://unpkg.com/three@0.161.0/build/three.module.js';
 
 const EMAILJS_SERVICE_ID = 'service_ktcd4zp';
 const EMAILJS_TEMPLATE_ID = 'template_yh79qbj';
-const EMAILJS_PUBLIC_KEY = 'x2P2JRv4AFlRKMJ8i';
+const EMAILJS_PUBLIC_KEY = 'f-SiiSSs6TjYI85Yj';
 
 const galleries = {
   store: {
